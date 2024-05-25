@@ -29,15 +29,17 @@ bady1.empty()
 bady1.empty()
 adr : str = bady2.text_input("수신자")
 if bady2.checkbox("참조"):
-    subadr : str = "618356@naver.com"
+    subadr : str = "couchip@hecto.co.kr"
 else:
     subadr : str = ""
 title : str = st.text_input("제목")
-select = st.selectbox("메일 내용 선택",("교환당","발행당"))
-if select == "교환당":
-    main = "교환당입니다."
-elif select == "발행당":
-    main = "발행당입니다."
+select = st.selectbox("메일 내용 선택",("선입금","후입금","IP미등록"))
+if select == "선입금":
+    main = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\mailText.json",orient='index',dtype={"선입금":str,"후입금":str,"IP미등록":str})[0]["선입금"]
+elif select == "후입금":
+    main = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\mailText.json",orient='index',dtype={"선입금":str,"후입금":str,"IP미등록":str})[0]["후입금"]
+elif select == "IP미등록":
+    main = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\mailText.json",orient='index',dtype={"선입금":str,"후입금":str,"IP미등록":str})[0]["IP미등록"]
 else:
     main = ""
 email = {

@@ -8,7 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(ChromeDriverManager().install())
 #로그인 정보 가져오기
 import pandas as pd
-works_login = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\db\\login.json",orient='records')
+works_login = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\login.json",orient='records')
 
 #크롬 드라이버 실행
 url = "https://auth.worksmobile.com/login/login?accessUrl=https%3A%2F%2Fmail.worksmobile.com%2F"
@@ -32,12 +32,12 @@ ActionChains(driver).click(passingMail).perform()
 time.sleep(1)
 while True:
     #인증번호 검증
-    if pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})['passnumber'].tolist()[-1] == 'test':
+    if pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})['passnumber'].tolist()[-1] == 'test':
         time.sleep(0.5)
         pass
     else:
         #인증 진행
-        email = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
+        email = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         passingN = driver.find_element(By.XPATH,'//input[@class="_authNo _authNo1"]')
         passingnumber = email['passnumber'].tolist()[-1]
         ActionChains(driver).click(passingN).send_keys('{}'.format(passingnumber)).perform()
