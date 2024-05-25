@@ -1,5 +1,4 @@
 import pandas as pd
-import subprocess
 import requests
 import json
 import streamlit as st
@@ -21,7 +20,7 @@ def sendMail():
     requests.post("http://127.0.0.1:8000/email",json.dumps(email))
 #인증번호 입력
 if st.button(label="쿠칩 메일전송 시작"):
-    subprocess.run(["python", "C:\\Users\\USER\\ve_1\\alarmCapture\\worksMail.py"])
+    pd.DataFrame({"be":"start"},index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
 bady1 = row(3, vertical_align="center")
 bady2 = row([2,1], vertical_align="center")
 passN : str = bady1.text_input("인증번호", max_chars=4)
