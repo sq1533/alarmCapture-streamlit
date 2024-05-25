@@ -9,7 +9,7 @@ from customs.custom import css
 st.markdown(css, unsafe_allow_html=True)
 
 #실시간 알람 불러오기
-with open('C:\\Users\\USER\\ve_1\\proj_web\\db\\info_.json','r',encoding="UTF-8") as f:
+with open('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\info_.json','r',encoding="UTF-8") as f:
     DF = json.load(f)
 #네비게이터 버튼 'ilillili', 'lliilliill', 'iillilill'
 row_ = row(3, vertical_align="top")

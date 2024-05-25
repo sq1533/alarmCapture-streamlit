@@ -10,12 +10,12 @@ st.markdown(css,unsafe_allow_html=True)
 #info_DB읽기 및 캐싱
 @st.cache_data(ttl=60*60*12)
 def data():
-    DF = pd.read_json('C:\\Users\\USER\\ve_1\\proj_web\\db\\info_.json',
+    DF = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\info_.json',
                         orient='records',
                         dtype={'mid':str,'info':str,'char':str})
     return DF
 #실시간 알람 불러오기
-A_df = pd.read_json('C:\\Users\\USER\\ve_1\\proj_web\\db\\Alarm_.json',
+A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                     orient='records',
                     dtype={'Alarm':str,'mid':str,'URL':str})
 Alarm_list = A_df['Alarm'].to_list()
@@ -35,7 +35,7 @@ def H_page():
         sp("autoMail")
     if count:
         #실시간 알람 불러오기
-        A_df = pd.read_json('C:\\Users\\USER\\ve_1\\proj_web\\db\\Alarm_.json',
+        A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                             orient='records',
                             dtype={'Alarm':str,'mid':str,'URL':str})
         Alarm_list = A_df['Alarm'].to_list()
@@ -48,8 +48,8 @@ def H_page():
         else:
             #requests.get(f"https://api.telegram.org/botAPI/sendMessage?chat_id=int&text={mid_list[-1]}")
             A_df.loc[A_df['mid']==mid_list[-1],'mid'] = "확인필요"
-            A_df.to_json('C:\\Users\\USER\\ve_1\\proj_web\\db\\Alarm_.json',orient='records',force_ascii=False,indent=4)
-            A_df = pd.read_json('C:\\Users\\USER\\ve_1\\proj_web\\db\\Alarm_.json',
+            A_df.to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',orient='records',force_ascii=False,indent=4)
+            A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                                 orient='records',
                                 dtype={'Alarm':str,'mid':str,'URL':str})
             Alarm_list = A_df['Alarm'].to_list()
