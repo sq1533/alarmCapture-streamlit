@@ -21,13 +21,13 @@ def start():
     id_box = driver.find_element(By.XPATH,'//input[@id="user_id"]')
     login_button_1 = driver.find_element(By.XPATH,'//button[@id="loginStart"]')
     ActionChains(driver)
-    id = works_login.loc['coochip']['id']
+    id = works_login['coochip']['id']
     ActionChains(driver).send_keys_to_element(id_box, '{}'.format(id)).click(login_button_1).perform()
     time.sleep(1)
     #로그인 정보입력(비밀번호)
     password_box = driver.find_element(By.XPATH,'//input[@id="user_pwd"]')
     login_button_2 = driver.find_element(By.XPATH,'//button[@id="loginBtn"]')
-    password = works_login.loc['coochip']['pw']
+    password = works_login['coochip']['pw']
     ActionChains(driver).send_keys_to_element(password_box, '{}'.format(password)).click(login_button_2).perform()
     time.sleep(1)
     #인증번호 전송
