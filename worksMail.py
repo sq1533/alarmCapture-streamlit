@@ -31,7 +31,7 @@ def start():
     ActionChains(driver).send_keys_to_element(password_box, '{}'.format(password)).click(login_button_2).perform()
     time.sleep(1)
     #인증번호 전송
-    passingMail = driver.find_element(By.XPATH,'//button[@id="privateEmailButton"]')
+    passingMail = driver.find_element(By.XPATH,'//a[@id="privateEmailButton"]')
     ActionChains(driver).click(passingMail).perform()
     time.sleep(1)
     while True:
@@ -42,7 +42,7 @@ def start():
         else:
             #인증 진행
             email = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
-            passingN = driver.find_element(By.XPATH,'//input[@class="_authNo _authNo1"]')
+            passingN = driver.find_element(By.XPATH,'//input[@id="number1"]')
             passingnumber = email['passnumber'].tolist()[-1]
             ActionChains(driver).click(passingN).send_keys('{}'.format(passingnumber)).perform()
             time.sleep(1)
