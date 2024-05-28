@@ -1,5 +1,4 @@
 import time
-import json
 
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
@@ -12,8 +11,7 @@ driver = webdriver.Chrome(options=chrome_options)
 from bs4 import BeautifulSoup
 import pandas as pd
 
-with open('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\login.json', 'r') as f:
-    works_login = json.load(f)
+works_login = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\login.json",orient='records')
 
 #크롬 드라이버 실행
 url = "https://auth.worksmobile.com/login/login?accessUrl=https%3A%2F%2Ftalk.worksmobile.com%2F"
@@ -23,13 +21,13 @@ driver.implicitly_wait(1)
 id_box = driver.find_element(By.XPATH,'//input[@id="user_id"]')
 login_button_1 = driver.find_element(By.XPATH,'//button[@id="loginStart"]')
 ActionChains(driver)
-id = works_login['works']['id']
+id = works_login.loc['works']['id']
 ActionChains(driver).send_keys_to_element(id_box, '{}'.format(id)).click(login_button_1).perform()
 time.sleep(1)
 #로그인 정보입력(비밀번호)
 password_box = driver.find_element(By.XPATH,'//input[@id="user_pwd"]')
 login_button_2 = driver.find_element(By.XPATH,'//button[@id="loginBtn"]')
-password = works_login['works']['pw']
+password = works_login.loc['works']['pw']
 ActionChains(driver).send_keys_to_element(password_box, '{}'.format(password)).click(login_button_2).perform()
 time.sleep(1)
 
