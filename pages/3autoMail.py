@@ -85,12 +85,6 @@ We are sending you an emergency notice as an error has occurred. Please refer be
 
 We will send you an update as soon as the recovery is complete.
 Thank you.
-
-
-Please note that this email is for outgoing only, and inquiries via reply will not be processed.
-Please contact below for inquiries.
-Hecto Financial | www.hectofinancial.co.kr
-9~10F, 6, Teheran-ro 34-gil, Gangnam-gu, Seoul, Republic of KoreaㆍCustomer Service : 1688-5130ㆍFAX : 02-588-2724\nCopyrightⓒ Hecto Financial Co., Ltd. All Rights Reserved.
 """.format(s=S,o=O,t=T)
         email = {
             "passnumber":passN,
@@ -122,12 +116,6 @@ We are sending you an emergency notice as an error has occurred. Please refer be
 
 We apologize for any inconvenience caused.
 Thank you.
-
-
-Please note that this email is for outgoing only, and inquiries via reply will not be processed.
-Please contact below for inquiries.
-Hecto Financial | www.hectofinancial.co.kr
-9~10F, 6, Teheran-ro 34-gil, Gangnam-gu, Seoul, Republic of KoreaㆍCustomer Service : 1688-5130ㆍFAX : 02-588-2724\nCopyrightⓒ Hecto Financial Co., Ltd. All Rights Reserved.
 """.format(s=S,o=O,t=T)
         email = {
             "passnumber":passN,
