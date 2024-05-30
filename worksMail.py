@@ -32,7 +32,7 @@ def coochip():
     #인증번호 전송
     passingMail = driver.find_element(By.XPATH,'//a[@id="privateEmailButton"]')
     ActionChains(driver).click(passingMail).perform()
-    time.sleep(1)
+    time.sleep(5)
     while True:
         mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
@@ -120,7 +120,7 @@ def enMail():
     #인증번호 전송
     passingMail = driver.find_element(By.XPATH,'//a[@id="privateEmailButton"]')
     ActionChains(driver).click(passingMail).perform()
-    time.sleep(1)
+    time.sleep(5)
     while True:
         mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
