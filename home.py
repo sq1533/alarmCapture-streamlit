@@ -24,17 +24,9 @@ mid_list = A_df['mid'].to_list()
 count = st_autorefresh(interval=3000,
                         limit=None,
                         key="refresh")
-#네비게이터 버튼 "조회","DB관리"
+#실시간 알람 불러오기
 def H_page():
-    row_ = row(3, vertical_align="top")
-    if row_.button("조회", use_container_width=True):
-        sp("lookup")
-    if row_.button("DB관리", use_container_width=True):
-        sp("DBM")
-    if row_.button("쿠칩 메일", use_container_width=True):
-        sp("autoMail")
     if count:
-        #실시간 알람 불러오기
         A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                             orient='records',
                             dtype={'Alarm':str,'mid':str,'URL':str})

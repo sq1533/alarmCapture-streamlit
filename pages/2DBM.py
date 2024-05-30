@@ -20,18 +20,7 @@ def change():
     requests.put(url,json.dumps(mk_ch))
 def delete():
     requests.post(url_d,json.dumps(mk_d))
-
-#네비게이터 버튼 'ilillili', 'lliilliill', 'iillilill'
-row_ = row(3, vertical_align="top")
-if row_.button("모니터링", use_container_width=True):
-    sp("home")
-if row_.button("조회", use_container_width=True):
-    sp("lookup")
-if row_.button("쿠칩 메일", use_container_width=True):
-    sp("autoMail")
-
 tab1,tab2,tab3 = st.tabs(["생성","수정","삭제"])
-
 with tab1:
     with st.form(key="mk_info"):
         mid: str = st.text_input("mid", max_chars=20)

@@ -9,14 +9,6 @@ from streamlit_extras.switch_page_button import switch_page as sp
 from customs.custom import css
 #사이드바 제거
 st.markdown(css, unsafe_allow_html=True)
-#네비게이터 버튼
-row_ = row(3, vertical_align="top")
-if row_.button("모니터링", use_container_width=True):
-    sp("home")
-if row_.button("조회", use_container_width=True):
-    sp("lookup")
-if row_.button("DB관리", use_container_width=True):
-    sp("DBM")
 #메일 DB저장
 def sendMail():
     requests.post("http://127.0.0.1:8000/email",json.dumps(email))
@@ -108,7 +100,7 @@ Hecto Financial | www.hectofinancial.co.kr
             "main":main
             }
         sendMail()
-        with st.spinner('Wait for it...'):
+        with st.spinner('전송중....'):
             time.sleep(3)
         st.success('메일전송 완료')
     bady6.empty()
@@ -144,8 +136,8 @@ Hecto Financial | www.hectofinancial.co.kr
             "main":main
             }
         sendMail()
-        with st.spinner('Wait for it...'):
-            time.sleep(3)
+        with st.spinner('전송중....'):
+            time.sleep(10)
     bady6.empty()
 with tab2:
     #인증번호 입력
@@ -181,6 +173,6 @@ with tab2:
         }
     if st.button(label="전송"):
         sendMail()
-        with st.spinner('Wait for it...'):
-            time.sleep(3)
+        with st.spinner('전송중....'):
+            time.sleep(10)
         st.success('메일전송 완료')

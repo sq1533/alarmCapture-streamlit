@@ -11,15 +11,6 @@ st.markdown(css, unsafe_allow_html=True)
 #실시간 알람 불러오기
 with open('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\info_.json','r',encoding="UTF-8") as f:
     DF = json.load(f)
-#네비게이터 버튼 'ilillili', 'lliilliill', 'iillilill'
-row_ = row(3, vertical_align="top")
-if row_.button("모니터링", use_container_width=True):
-    sp("home")
-if row_.button("DB관리", use_container_width=True):
-    sp("DBM")
-if row_.button("쿠칩 메일", use_container_width=True):
-    sp("autoMail")
-
 mid = st.text_input("MID조회(입력 후 Enter)")
 look = [i for i in range(len(DF)) if DF[i]['mid']==mid]
 
