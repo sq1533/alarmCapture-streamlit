@@ -76,7 +76,7 @@ def coochip():
             #전송 클릭_2
             send_button = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div/h3/div/button[1]')
             ActionChains(driver).click(send_button).perform()
-            time.sleep(1)
+            time.sleep(5)
             """
             driver.quit()
             mailReset = {
@@ -158,11 +158,13 @@ def enMail():
             #전송 클릭_1
             send_button1 = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
             ActionChains(driver).click(send_button1).perform()
-            time.sleep(1)
+            time.sleep(5)
+            """
             #전송 클릭_2
             send_button2 = driver.find_element(By.XPATH,'//button[@class="lw_btn_point_40"]')
             ActionChains(driver).click(send_button2).perform()
             time.sleep(5)
+            """
             driver.quit()
             mailReset = {
                 "passnumber":"test",
