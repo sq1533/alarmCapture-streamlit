@@ -36,7 +36,7 @@ def coochip():
     while True:
         mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
-        if mail['passnumber'].tolist()[-1] == 'test' or mail['passnumber'].tolist()[-1] == '':
+        if not(mail['passnumber'].tolist()[-1].isdigit()):
             time.sleep(0.5)
             pass
         else:
@@ -124,7 +124,7 @@ def enMail():
     while True:
         mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
-        if mail['passnumber'].tolist()[-1] == 'test' or mail['passnumber'].tolist()[-1] == '':
+        if not(mail['passnumber'].tolist()[-1].isdigit()):
             time.sleep(0.5)
             pass
         else:
