@@ -66,11 +66,11 @@ with tab1:
     clear_DAY = enMail["월"][clear_DAY1.split("-")[1]]+"-"+clear_DAY1.split("-")[2]+"-"+clear_DAY1.split("-")[0]
     error_TIME = str(bady5.text_input("장애 시작 시간", (datetime.now().strftime("%H:%M")),label_visibility="hidden"))
     clear_TIME = str(bady5.text_input("장애 종료 시간", (datetime.now().strftime("%H:%M")),label_visibility="hidden"))
-    error_MtoS = str(datetime.strptime(error_DAY1,'%Y-%m-%d').strftime("%A"))
-    clear_MtoS = str(datetime.strptime(clear_DAY1,'%Y-%m-%d').strftime("%A"))
+    error_MtoS = str(datetime.strptime(error_DAY1,'%Y-%m-%d').strftime("%a"))
+    clear_MtoS = str(datetime.strptime(clear_DAY1,'%Y-%m-%d').strftime("%a"))
     if bady6.button(label="장애안내"):
         T = error_DAY+"("+error_MtoS+")"+" "+error_TIME+"~"
-        title = "[{s}] {o} Error Recovery Notice ({t})".format(s=S,o=O,t=T)
+        title = "[{s}] {o} Error Notice ({t})".format(s=S,o=O,t=T)
         main = """
 Dear valued customers.
 Thank you for using Hecto Financial's {s} service.
@@ -117,9 +117,10 @@ We are sending you an emergency notice as an error has occurred. Please refer be
 - Impacted Service      : {s}
 - Date & Time of Error : {t}
 - Details                   : Service not available
+- Result                    : Error recovery completed, service use normalized
 --------------------------------------------------------------------------------------------------------------
 
-We will send you an update as soon as the recovery is complete.
+We apologize for any inconvenience caused.
 Thank you.
 
 
