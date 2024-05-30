@@ -26,6 +26,10 @@ count = st_autorefresh(interval=3000,
                         key="refresh")
 #실시간 알람 불러오기
 def H_page():
+    with st.sidebar:
+        stock = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Stock.json',orient='dict')
+        stoKey = st.selectbox("증권사 이용 핫라인",stock["stock"].keys())
+        st.write(stock["stock"][stoKey])
     if count:
         A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                             orient='records',
