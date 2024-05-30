@@ -34,8 +34,9 @@ def coochip():
     ActionChains(driver).click(passingMail).perform()
     time.sleep(1)
     while True:
+        mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
-        if pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})['passnumber'].tolist()[-1] == 'test':
+        if mail['passnumber'].tolist()[-1] == 'test' or mail['passnumber'].tolist()[-1] == '':
             time.sleep(0.5)
             pass
         else:
@@ -121,8 +122,9 @@ def enMail():
     ActionChains(driver).click(passingMail).perform()
     time.sleep(1)
     while True:
+        mail = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})
         #인증번호 검증
-        if pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\sendMail.json",orient='records',dtype={"passnumber":str,"addr":str,"subaddr":str,"title":str,"main":str})['passnumber'].tolist()[-1] == 'test':
+        if mail['passnumber'].tolist()[-1] == 'test' or mail['passnumber'].tolist()[-1] == '':
             time.sleep(0.5)
             pass
         else:
