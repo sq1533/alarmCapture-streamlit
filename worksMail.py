@@ -2,7 +2,6 @@ import time
 #로그인 및 시작 정보 확인
 import pandas as pd
 works_login = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\login.json",orient='records')
-startPoint = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json",orient='records')
 def coochip():
     #크롬 드라이버 옵션 설정
     from selenium import webdriver
@@ -48,7 +47,7 @@ def coochip():
             time.sleep(1)
             #메일전송 페이지 전환
             driver.get('https://mail.worksmobile.com/#/compose?orderType=new')
-            time.sleep(1)
+            time.sleep(3)
             #수신자 입력
             address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')
             addrs = email['addr'].tolist()[-1]
@@ -72,7 +71,7 @@ def coochip():
             #전송 클릭_1
             send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
             ActionChains(driver).click(send_button).perform()
-            time.sleep(1)
+            time.sleep(5)
             """
             #전송 클릭_2
             send_button = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div/h3/div/button[1]')
@@ -135,7 +134,7 @@ def enMail():
             time.sleep(1)
             #메일전송 페이지 전환
             driver.get('https://mail.worksmobile.com/#/compose?orderType=new')
-            time.sleep(1)
+            time.sleep(3)
             #수신자 입력
             address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')
             addrs = email['addr'].tolist()[-1]
@@ -157,15 +156,13 @@ def enMail():
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
             time.sleep(1)
             #전송 클릭_1
-            send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
-            ActionChains(driver).click(send_button).perform()
+            send_button1 = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
+            ActionChains(driver).click(send_button1).perform()
             time.sleep(1)
-            """
             #전송 클릭_2
-            send_button = driver.find_element(By.XPATH,'/html/body/div[3]/div/div/div/h3/div/button[1]')
-            ActionChains(driver).click(send_button).perform()
-            time.sleep(1)
-            """
+            send_button2 = driver.find_element(By.XPATH,'//button[@class="lw_btn_point_40"]')
+            ActionChains(driver).click(send_button2).perform()
+            time.sleep(5)
             driver.quit()
             mailReset = {
                 "passnumber":"test",
@@ -180,12 +177,15 @@ def enMail():
 
 if __name__ == "__main__":
     while True:
-        if startPoint['be'].tolist()[0] == 'start':
+        startPoint = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json",orient='records')
+        if startPoint['coochip'].tolist()[0] == 'start':
             coochip()
-            pd.DataFrame([{"be":"end"},{"be":"end"}],index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
-        elif startPoint['be'].tolist()[1] == 'start':
+            pd.DataFrame({"coochip":"end","enMail":"end"},index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
+            time.sleep(1)
+        elif startPoint['enMail'].tolist()[0] == 'start':
             enMail()
-            pd.DataFrame([{"be":"end"},{"be":"end"}],index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
+            pd.DataFrame({"coochip":"end","enMail":"end"},index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
+            time.sleep(1)
         else:
             time.sleep(1)
             pass
