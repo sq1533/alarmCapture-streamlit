@@ -57,20 +57,18 @@ def coochip():
             #수신자 입력
             addrs = email['addr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
-            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
-            #참조 입력
-            subaddrs = email['subaddr'].tolist()[-1]
-            ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
-            ActionChains(driver).click(mailmain).perform()
+            #메일내용 입력
+            mmain = email['main'].tolist()[-1]
+            ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
             time.sleep(1)
             #메일제목 입력
             mtitle = email['title'].tolist()[-1]
             ActionChains(driver).click(mailtitle).send_keys_to_element(mailtitle,'{}'.format(mtitle)).perform()
             time.sleep(1)
-            #메일내용 입력
-            mmain = email['main'].tolist()[-1]
-            ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
+            #참조 입력
+            subaddrs = email['subaddr'].tolist()[-1]
+            ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
             time.sleep(1)
             #전송 클릭_1
             ActionChains(driver).click(send_button).perform()
@@ -147,20 +145,18 @@ def enMail():
             addrs = email['addr'].tolist()[-1]
             #수신자 입력
             ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
-            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
-            #참조 입력
-            subaddrs = email['subaddr'].tolist()[-1]
-            ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
-            ActionChains(driver).click(mailmain).perform()
+            #메일내용 입력
+            mmain = email['main'].tolist()[-1]
+            ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
             time.sleep(1)
             #메일제목 입력
             mtitle = email['title'].tolist()[-1]
             ActionChains(driver).click(mailtitle).send_keys_to_element(mailtitle,'{}'.format(mtitle)).perform()
             time.sleep(1)
-            #메일내용 입력
-            mmain = email['main'].tolist()[-1]
-            ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
+            #참조 입력
+            subaddrs = email['subaddr'].tolist()[-1]
+            ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
             time.sleep(1)
             #전송 클릭_1
             ActionChains(driver).click(send_button1).perform()
