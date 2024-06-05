@@ -54,6 +54,7 @@ def ezMail(id:str,pw:str):
             mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')#제목 입력창
             mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')#내용 입력창
             send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')#전송 버튼
+            send_each = driver.find_element(By.XPATH,'//input[@name="sendSeparately"]')#개인별 체크박스
             #메일내용 입력
             mmain = email['main'].tolist()[-1]
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
@@ -69,6 +70,9 @@ def ezMail(id:str,pw:str):
             #수신자 입력
             addrs = email['addr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
+            time.sleep(1)
+            #개인별 전송 클릭
+            ActionChains(driver).click(send_each).perform()
             time.sleep(1)
             #전송 클릭_1
             ActionChains(driver).click(send_button).perform()
