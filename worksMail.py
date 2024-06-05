@@ -46,7 +46,9 @@ def ezMail(id:str,pw:str):
             time.sleep(1)
             #메일전송 페이지 전환
             driver.get('https://mail.worksmobile.com/#/compose?orderType=new')
-            time.sleep(3)
+            time.sleep(2)
+            driver.maximize_window()
+            time.sleep(1)
             address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')#수신자 입력창
             subaddress = driver.find_element(By.XPATH,'//input[@aria-label="참조"]')#참조 입력창
             mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')#제목 입력창
