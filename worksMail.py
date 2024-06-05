@@ -54,10 +54,6 @@ def coochip():
             mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')#제목 입력창
             mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')#내용 입력창
             send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')#전송 버튼
-            #수신자 입력
-            addrs = email['addr'].tolist()[-1]
-            ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
-            time.sleep(1)
             #메일내용 입력
             mmain = email['main'].tolist()[-1]
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
@@ -69,6 +65,10 @@ def coochip():
             #참조 입력
             subaddrs = email['subaddr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
+            time.sleep(1)
+            #수신자 입력
+            addrs = email['addr'].tolist()[-1]
+            ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
             time.sleep(1)
             #전송 클릭_1
             ActionChains(driver).click(send_button).perform()
@@ -143,9 +143,6 @@ def enMail():
             mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')#내용 입력창
             send_button1 = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')#전송 버튼1
             addrs = email['addr'].tolist()[-1]
-            #수신자 입력
-            ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
-            time.sleep(1)
             #메일내용 입력
             mmain = email['main'].tolist()[-1]
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
@@ -157,6 +154,9 @@ def enMail():
             #참조 입력
             subaddrs = email['subaddr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
+            time.sleep(1)
+            #수신자 입력
+            ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
             time.sleep(1)
             #전송 클릭_1
             ActionChains(driver).click(send_button1).perform()
