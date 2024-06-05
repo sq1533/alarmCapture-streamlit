@@ -49,28 +49,30 @@ def coochip():
             #메일전송 페이지 전환
             driver.get('https://mail.worksmobile.com/#/compose?orderType=new')
             time.sleep(3)
+            address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')#수신자 입력창
+            subaddress = driver.find_element(By.XPATH,'//input[@aria-label="참조"]')#참조 입력창
+            mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')#제목 입력창
+            mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')#내용 입력창
+            send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')#전송 버튼
             #수신자 입력
-            address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')
             addrs = email['addr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
+            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
             #참조 입력
-            subaddress = driver.find_element(By.XPATH,'//input[@aria-label="참조"]')
             subaddrs = email['subaddr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
+            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
             #메일제목 입력
-            mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')
             mtitle = email['title'].tolist()[-1]
             ActionChains(driver).click(mailtitle).send_keys_to_element(mailtitle,'{}'.format(mtitle)).perform()
             time.sleep(1)
             #메일내용 입력
-            mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')
             mmain = email['main'].tolist()[-1]
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
             time.sleep(1)
             #전송 클릭_1
-            send_button = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
             ActionChains(driver).click(send_button).perform()
             time.sleep(5)
             """
@@ -137,28 +139,30 @@ def enMail():
             #메일전송 페이지 전환
             driver.get('https://mail.worksmobile.com/#/compose?orderType=new')
             time.sleep(3)
-            #수신자 입력
-            address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')
+            address = driver.find_element(By.XPATH,'//input[@aria-label="받는사람"]')#수신자 입력창
+            subaddress = driver.find_element(By.XPATH,'//input[@aria-label="참조"]')#참조 입력창
+            mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')#제목 입력창
+            mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')#내용 입력창
+            send_button1 = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')#전송 버튼1
             addrs = email['addr'].tolist()[-1]
+            #수신자 입력
             ActionChains(driver).send_keys_to_element(address, '{}'.format(addrs)).perform()
+            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
             #참조 입력
-            subaddress = driver.find_element(By.XPATH,'//input[@aria-label="참조"]')
             subaddrs = email['subaddr'].tolist()[-1]
             ActionChains(driver).send_keys_to_element(subaddress, '{}'.format(subaddrs)).perform()
+            ActionChains(driver).click(mailmain).perform()
             time.sleep(1)
             #메일제목 입력
-            mailtitle = driver.find_element(By.XPATH,'//input[@aria-label="제목"]')
             mtitle = email['title'].tolist()[-1]
             ActionChains(driver).click(mailtitle).send_keys_to_element(mailtitle,'{}'.format(mtitle)).perform()
             time.sleep(1)
             #메일내용 입력
-            mailmain = driver.find_element(By.XPATH,'/html/body/div[1]/div[2]/div[3]/div[2]/div/fieldset/div/div/div/div[3]')
             mmain = email['main'].tolist()[-1]
             ActionChains(driver).click(mailmain).send_keys(Keys.PAGE_UP).send_keys('{}'.format(mmain)).perform()
             time.sleep(1)
             #전송 클릭_1
-            send_button1 = driver.find_element(By.XPATH,'//button[@data-hotkey="sendKey"]')
             ActionChains(driver).click(send_button1).perform()
             time.sleep(5)
             """
