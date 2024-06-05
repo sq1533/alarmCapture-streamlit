@@ -140,7 +140,7 @@ with tab2:
     bady1.empty()
     adr : str = bady2.text_input("수신자")
     if bady2.checkbox("참조"):
-        subadr : str = "couchip@hecto.co.kr"
+        subadr : str = "couchip@hecto.co.kr, mnt@hecto.co.kr"
     else:
         subadr : str = ""
     title : str = st.text_input("제목")
