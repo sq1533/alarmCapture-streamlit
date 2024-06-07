@@ -26,7 +26,9 @@ with tab1:
     #메일 정보 입력
     bady1 = row(3, vertical_align="center")
     st.write("수신자")
-    bady2 = row([1,1,1,1,2], vertical_align="center")
+    bady2_1 = row([1,1,1,1], vertical_align="center")
+    st.write("참조자")
+    bady2_2 = row([1], vertical_align="center")
     bady3 = row([2,1,1], vertical_align="center")
     bady4 = row([1,1], vertical_align="center")
     bady5 = row([1,1], vertical_align="center")
@@ -36,16 +38,16 @@ with tab1:
     bady1.empty()
     bady1.empty()
     #메일 수신자 선택
-    if bady2.checkbox("간편 송금"):adr1 : str = enMail["수신자"]["간편송금"]
+    if bady2_1.checkbox("간편 송금"):adr1 : str = enMail["수신자"]["간편송금"]
     else:adr1 : str = ""
-    if bady2.checkbox("내통장결제"):adr2 : str = enMail["수신자"]["내통장결제"]
+    if bady2_1.checkbox("내통장결제"):adr2 : str = enMail["수신자"]["내통장결제"]
     else:adr2 : str = ""
-    if bady2.checkbox("PG"):adr3 : str = enMail["수신자"]["PG"]
+    if bady2_1.checkbox("PG"):adr3 : str = enMail["수신자"]["PG"]
     else:adr3 : str = ""
-    if bady2.checkbox("테스트"):adr3 : str = "mnt@hecto.co.kr"
+    if bady2_1.checkbox("테스트"):adr3 : str = "mnt@hecto.co.kr"
     else:adr3 : str = ""
     adr : str = adr1+" "+adr2+" "+adr3
-    if bady2.checkbox("참조(해외영업팀)"):subadr : str = "t_291ts@hecto.co.kr, mnt@hecto.co.kr"
+    if bady2_2.checkbox("참조(해외영업팀, 서비스관리팀)",value=True):subadr : str = "t_291ts@hecto.co.kr, mnt@hecto.co.kr"
     else:subadr : str = ""
     S = []
     O = ""
@@ -136,12 +138,13 @@ with tab2:
         pd.DataFrame({"coochip":"start","enMail":"end"},index=[0]).to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\start.json',orient='records',force_ascii=False,indent=4)
     coochip = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\mailText.json",orient='index',dtype={"선입금":str,"후입금":str,"IP미등록":str})
     bady1 = row(3, vertical_align="center")
-    bady2 = row([2,1], vertical_align="center")
+    bady2_1 = row(1, vertical_align="center")
+    bady2_2 = row(1, vertical_align="center")
     passN : str = bady1.text_input("pg_info2 인증번호", max_chars=4)
     bady1.empty()
     bady1.empty()
-    adr : str = bady2.text_input("수신자")
-    if bady2.checkbox("참조"):
+    adr : str = bady2_1.text_input("수신자")
+    if bady2_2.checkbox("참조자(쿠폰사업팀, 서비스관리팀)",value=True):
         subadr : str = "couchip@hecto.co.kr, mnt@hecto.co.kr"
     else:
         subadr : str = ""
