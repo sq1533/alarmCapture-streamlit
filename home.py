@@ -24,7 +24,6 @@ count = st_autorefresh(interval=3000,
 #실시간 알람 불러오기
 def H_page():
     #미정의 MID 확인
-    TBD = ["미정의 MID"]
     if count:
         A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                             orient='records',
@@ -37,20 +36,13 @@ def H_page():
             st.write(data().loc[data()['mid']==mid_list[-1]]['info'].to_list()[0])
             st.write(data().loc[data()['mid']==mid_list[-1]]['char'].to_list()[0])
         else:
-            TBD = list(set(TBD.append(mid_list[-1])))
-            A_df.loc[A_df['mid']==mid_list[-1],'mid'] = "확인필요"
-            A_df.to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',orient='records',force_ascii=False,indent=4)
-            A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
-                                orient='records',
-                                dtype={'Alarm':str,'mid':str,'URL':str})
-            Alarm_list = A_df['Alarm'].to_list()
-            mid_list = A_df['mid'].to_list()
+            #st.write(f"URL:{A_df['URL'].to_list()[-1]}")
+            st.write(f"{mid_list[-1]} 확인필요  \nDBM페이지 가맹점, 서비스, 담당자 정보 생성")
         st.divider()
     with st.sidebar:
         stock = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Stock.json',orient='dict')
         stoKey = st.selectbox("증권사 이용 핫라인",stock["stock"].keys())
         st.write(stock["stock"][stoKey])
-        st.write(TBD)
 
 if __name__ == '__main__':
     H_page()
