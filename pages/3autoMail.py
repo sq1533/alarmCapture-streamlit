@@ -5,7 +5,6 @@ import requests
 import json
 import streamlit as st
 from streamlit_extras.row import row
-from streamlit_extras.switch_page_button import switch_page as sp
 from customs.custom import css
 #사이드바 제거
 st.markdown(css, unsafe_allow_html=True)

@@ -1,9 +1,6 @@
 import pandas as pd
-import requests
 import streamlit as st
 from streamlit_autorefresh import st_autorefresh
-from streamlit_extras.row import row
-from streamlit_extras.switch_page_button import switch_page as sp
 from customs.custom import css
 #상단 빈칸제거 및 사이드바 제거
 st.markdown(css,unsafe_allow_html=True)
@@ -42,7 +39,6 @@ def H_page():
             st.write(data().loc[data()['mid']==mid_list[-1]]['info'].to_list()[0])
             st.write(data().loc[data()['mid']==mid_list[-1]]['char'].to_list()[0])
         else:
-            #requests.get(f"https://api.telegram.org/botAPI/sendMessage?chat_id=int&text={mid_list[-1]}")
             A_df.loc[A_df['mid']==mid_list[-1],'mid'] = "확인필요"
             A_df.to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',orient='records',force_ascii=False,indent=4)
             A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
