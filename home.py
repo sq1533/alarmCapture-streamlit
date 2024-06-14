@@ -23,6 +23,8 @@ count = st_autorefresh(interval=3000,
                         key="refresh")
 #실시간 알람 불러오기
 def H_page():
+    #미정의 MID 확인
+    TBD = ["미정의 MID"]
     if count:
         A_df = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
                             orient='records',
@@ -35,7 +37,6 @@ def H_page():
             st.write(data().loc[data()['mid']==mid_list[-1]]['info'].to_list()[0])
             st.write(data().loc[data()['mid']==mid_list[-1]]['char'].to_list()[0])
         else:
-            TBD = []
             TBD = list(set(TBD.append(mid_list[-1])))
             A_df.loc[A_df['mid']==mid_list[-1],'mid'] = "확인필요"
             A_df.to_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',orient='records',force_ascii=False,indent=4)
