@@ -43,7 +43,7 @@ def H_page():
         order = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\order.json',orient='records')
         stoKey = st.selectbox("증권사 이용 핫라인",order.loc[0]["stock"].keys())
         st.write(order.loc[0]["stock"][stoKey])
-        st.selectbox("주요 서버 목록",order.loc[1]["server"])
+        st.selectbox("주요 서버 목록",order.loc[1]["server"],index=None)
 
 if __name__ == '__main__':
     H_page()
