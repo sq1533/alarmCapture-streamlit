@@ -40,9 +40,10 @@ def H_page():
             st.write(f"{mid_list[-1]} 확인필요  \nDBM페이지 가맹점, 서비스, 담당자 정보 생성")
         st.divider()
     with st.sidebar:
-        stock = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Stock.json',orient='dict')
-        stoKey = st.selectbox("증권사 이용 핫라인",stock["stock"].keys())
-        st.write(stock["stock"][stoKey])
+        order = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\order.json',orient='records')
+        stoKey = st.selectbox("증권사 이용 핫라인",order.loc[0]["stock"].keys())
+        st.write(order.loc[0]["stock"][stoKey])
+        st.selectbox("주요 서버 목록",order.loc[1]["server"])
 
 if __name__ == '__main__':
     H_page()
