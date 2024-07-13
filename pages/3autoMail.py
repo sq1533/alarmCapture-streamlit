@@ -43,9 +43,9 @@ with tab1:
     else:adr2 : str = ""
     if bady2_1.checkbox("PG"):adr3 : str = enMail["수신자"]["PG"]
     else:adr3 : str = ""
-    if bady2_1.checkbox("테스트"):adr3 : str = "mnt@hecto.co.kr"
-    else:adr3 : str = ""
-    adr : str = adr1+" "+adr2+" "+adr3
+    if bady2_1.checkbox("테스트"):adr4 : str = "mnt@hecto.co.kr"
+    else:adr4 : str = ""
+    adr : str = f"{adr1},{adr2},{adr3},{adr4}"
     if bady2_2.checkbox("참조(해외영업팀, 서비스관리팀)",value=True):subadr : str = "t_291ts@hecto.co.kr, mnt@hecto.co.kr"
     else:subadr : str = ""
     S = []
