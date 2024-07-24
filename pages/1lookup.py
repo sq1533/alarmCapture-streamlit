@@ -16,9 +16,7 @@ look = [i for i in range(len(DF)) if DF[i]['mid']==mid]
 
 if mid:
     if look != []:
-        st.markdown(':blue[**정보**]')
         st.write(DF[look[0]]['info'])
-        st.markdown(':blue[**담당자**]')
         st.write(DF[look[0]]['char'])
     else:
         st.write('존재하지 않는 MID입니다.')
