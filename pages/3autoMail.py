@@ -67,8 +67,8 @@ with tab1:
     error_DAY = enMail["월"][error_DAY1.split("-")[1]]+"-"+error_DAY1.split("-")[2]+"-"+error_DAY1.split("-")[0]
     clear_DAY1 = str(bady4.date_input("종료 시간",(datetime.now()),format="YYYY-MM-DD"))
     clear_DAY = enMail["월"][clear_DAY1.split("-")[1]]+"-"+clear_DAY1.split("-")[2]+"-"+clear_DAY1.split("-")[0]
-    error_TIME = str(bady5.text_input("장애 시작 시간", (datetime.now().strftime("%H:%M")),label_visibility="hidden"))
-    clear_TIME = str(bady5.text_input("장애 종료 시간", (datetime.now().strftime("%H:%M")),label_visibility="hidden"))
+    error_TIME = str(bady5.text_input("장애 시작 시간","",label_visibility="hidden"))
+    clear_TIME = str(bady5.text_input("장애 종료 시간","",label_visibility="hidden"))
     error_MtoS = str(datetime.strptime(error_DAY1,'%Y-%m-%d').strftime("%a"))
     clear_MtoS = str(datetime.strptime(clear_DAY1,'%Y-%m-%d').strftime("%a"))
     if bady6.button(label="장애안내"):
