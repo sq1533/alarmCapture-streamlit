@@ -1,5 +1,4 @@
 import time
-
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
@@ -7,11 +6,13 @@ from selenium.webdriver.common.by import By
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--blink-settings=imagesEnabled=false')
 driver = webdriver.Chrome(options=chrome_options)
-
 from bs4 import BeautifulSoup
 import pandas as pd
-
-works_login = pd.read_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\login.json",orient='records')
+import json
+#로그인 정보 호출
+with open('C:\\Users\\USER\\ve_1\\DB\\3loginInfo.json','r',encoding="UTF-8") as f:
+    login = json.load(f)
+works_login = pd.Series(login['works'])
 
 #크롬 드라이버 실행
 url = "https://auth.worksmobile.com/login/login?accessUrl=https%3A%2F%2Ftalk.worksmobile.com%2F"
@@ -21,13 +22,13 @@ driver.implicitly_wait(1)
 id_box = driver.find_element(By.XPATH,'//input[@id="user_id"]')
 login_button_1 = driver.find_element(By.XPATH,'//button[@id="loginStart"]')
 ActionChains(driver)
-id = works_login['works']['id']
+id = works_login['id']
 ActionChains(driver).send_keys_to_element(id_box, '{}'.format(id)).click(login_button_1).perform()
 time.sleep(1)
 #로그인 정보입력(비밀번호)
 password_box = driver.find_element(By.XPATH,'//input[@id="user_pwd"]')
 login_button_2 = driver.find_element(By.XPATH,'//button[@id="loginBtn"]')
-password = works_login['works']['pw']
+password = works_login['pw']
 ActionChains(driver).send_keys_to_element(password_box, '{}'.format(password)).click(login_button_2).perform()
 time.sleep(1)
 
@@ -42,16 +43,14 @@ a_room = ["26143386","26143422","26143419","82166397","26143441","108290282","10
 
 #알람데이터 json파일 저장
 def re(x):
-    alarmJson = x.to_json("C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json",orient='records',force_ascii=False,indent=4)
+    alarmJson = x.to_json("C:\\Users\\USER\\ve_1\\DB\\1worksAlarm_.json",orient='records',force_ascii=False,indent=4)
     new_alarm = driver.find_element(By.CLASS_NAME,'chat_list').find_element(By.CLASS_NAME,'new')
     new_alarm.click()
     driver.refresh()
     return alarmJson
 #알람데이터 크롤링
 def alarmcheck():
-    AR = pd.read_json('C:\\Users\\USER\\ve_1\\alarmCapture\\db\\Alarm_.json',
-                      orient='records',
-                      dtype={'Alarm':str,'mid':str,'URL':str})
+    AR = pd.read_json('C:\\Users\\USER\\ve_1\\DB\\1worksAlarm_.json',orient='records',dtype={'Alarm':str,'mid':str})
     r = len(AR)
     if r > 10:
         AR.drop([0],axis=0,inplace=True)
@@ -65,7 +64,7 @@ def alarmcheck():
     if soup.find('li',check).find(class_='new') != None:
         A_li = soup.find('li',check).find(class_='new').find_parent('li')
         AI_alarm = A_li.find('dd').get_text()
-        AI_alarm = AI_alarm.replace('●','  \n●')
+        AI_alarm = AI_alarm.replace('●','<br>●')
         #재외처리 알람
         if any(i in AI_alarm for i in exce):
             pass
@@ -73,8 +72,7 @@ def alarmcheck():
         elif '자동취소응답오류' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["자동취소응답오류"],
-                "URL":['']
+                "mid":["자동취소응답오류"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -82,8 +80,7 @@ def alarmcheck():
         elif '기관 재판매 PG 정산 정보 없음' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["재판매 정산 정보 없음"],
-                "URL":['']
+                "mid":["재판매 정산 정보 없음"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -91,8 +88,7 @@ def alarmcheck():
         elif 'vavsreceipt' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["vavsreceipt"],
-                "URL":['']
+                "mid":["vavsreceipt"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -100,8 +96,7 @@ def alarmcheck():
         elif '현금영수증' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["현금영수증"],
-                "URL":['']
+                "mid":["현금영수증"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -109,8 +104,7 @@ def alarmcheck():
         elif 'autocancel' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["autocancel"],
-                "URL":['']
+                "mid":["autocancel"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -118,8 +112,7 @@ def alarmcheck():
         elif '거래없음[' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["VAN_거래없음"],
-                "URL":['']
+                "mid":["VAN_거래없음"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -127,8 +120,7 @@ def alarmcheck():
         elif '은행 잔액 부족' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["가상 재판매 모계좌 잔액부족"],
-                "URL":['']
+                "mid":["가상 재판매 모계좌 잔액부족"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -136,8 +128,7 @@ def alarmcheck():
         elif '응답지연' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["응답지연"],
-                "URL":['']
+                "mid":["응답지연"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -145,8 +136,7 @@ def alarmcheck():
         elif '응답 지연' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["응답지연"],
-                "URL":['']
+                "mid":["응답지연"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -154,8 +144,7 @@ def alarmcheck():
         elif '/미처리' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["미처리"],
-                "URL":['']
+                "mid":["미처리"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -163,8 +152,7 @@ def alarmcheck():
         elif '(50)장애발생' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["저축은행 가상"],
-                "URL":['']
+                "mid":["저축은행 가상"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -172,8 +160,7 @@ def alarmcheck():
         elif 'VDBE' in AI_alarm:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["VDBE"],
-                "URL":['']
+                "mid":["VDBE"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -183,8 +170,7 @@ def alarmcheck():
             F_code = al[1]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[F_code],
-                "URL":['']
+                "mid":[F_code]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -194,8 +180,7 @@ def alarmcheck():
             V_code = al[3]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[V_code],
-                "URL":['']
+                "mid":[V_code]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -207,8 +192,7 @@ def alarmcheck():
             VV_code = VV_code_3[0]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[VV_code],
-                "URL":['']
+                "mid":[VV_code]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -220,8 +204,7 @@ def alarmcheck():
             VV_code = VV_code_3[0]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[VV_code],
-                "URL":['']
+                "mid":[VV_code]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -232,11 +215,9 @@ def alarmcheck():
             MID_2 = MID_1[1].split('[',1)
             MID_3 = MID_2[1].split(']',1)
             MID = MID_3[0]
-            url = AI_alarm.split('●실시간 상황 URL링크:',1)[1]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[MID],
-                "URL":[url]
+                "mid":[MID]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -246,11 +227,9 @@ def alarmcheck():
             MID_1 = AI.split('오류코드:')
             MID_2 = MID_1[1].split('(',1)
             code = str(MID_2[0])
-            url = AI_alarm.split('●실시간 상황 URL링크:',1)[1]
             a = {
                 "Alarm":[AI_alarm],
-                "mid":[code],
-                "URL":[url]
+                "mid":[code]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -258,8 +237,7 @@ def alarmcheck():
         else:
             a = {
                 "Alarm":[AI_alarm],
-                "mid":["확인필요"],
-                "URL":['']
+                "mid":["확인필요"]
                 }
             ad = pd.DataFrame(a,index=[0])
             con = pd.concat([Alarm,ad],ignore_index=True)
@@ -267,7 +245,6 @@ def alarmcheck():
     else:
         pass
     return Alarm
-    
 while True:
     alarmcheck()
     time.sleep(0.1)
