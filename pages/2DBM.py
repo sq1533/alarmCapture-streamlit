@@ -38,23 +38,19 @@ with tab1:
                 st.markdown("MID가 이미 존재합니다.")
 #수정
 with tab2:
-    with st.form(key="mk"):
-        mid: str = st.text_input("mid", max_chars=20)
-        mk = {
-            "mid":mid
-        }
-        btn_1 = st.form_submit_button(label="조회")
-        if btn_1:
-            if mk['mid'] not in midList:
-                st.markdown("MID가 존재하지 않습니다.")
+    mid: str = st.text_input("mid", max_chars=20)
+    btn_2 = st.button(label="조회")
+    if btn_2:
+        if mid not in midList:
+            st.markdown("MID가 존재하지 않습니다.")
     with st.form(key="mk_ch"):
-        if mk['mid'] not in midList:
-            pass
+        if mid not in midList:
+            swap = "수정 전 mid를 조회 해주세요"
         else:
-            swap = mk['mid']
+            swap = mid
         mid: str = st.text_input("mid",swap,max_chars=20)
-        info: str = st.text_area("정보",midInfo.loc[midInfo['mid']==swap]['info'].values.replace("  \n","\n"),height=250)
-        char: str = st.text_area("담당자",midInfo.loc[midInfo['mid']==swap]['char'].values.replace("  \n","\n"),height=100)
+        info: str = st.text_area("정보",midInfo.loc[midInfo['mid']==swap]['info'].tolist()[0].replace("<br>","\n"),height=250)
+        char: str = st.text_area("담당자",midInfo.loc[midInfo['mid']==swap]['char'].tolist()[0].replace("<br>","\n"),height=100)
         mk_ch = {
             "mid":mid,
             "info":info.replace('\n','  \n'),
