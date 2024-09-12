@@ -8,10 +8,14 @@ def ezMail(id:str,pw:str):
     from selenium.webdriver.common.action_chains import ActionChains
     from selenium.webdriver.common.keys import Keys
     from selenium.webdriver.common.by import By
-    #크롬 드라이버 옵션 설정
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--blink-settings=imagesEnabled=false')
-    driver = webdriver.Chrome(options=chrome_options)
+    #크롬 옵션설정
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument('--disable-gpu')
+    options.add_argument("--disable-javascript")
+    options.add_argument('--disable-extensions')
+    options.add_argument('--blink-settings=imagesEnabled=false')
+    driver = webdriver.Chrome(options=options)
     #크롬 드라이버 실행
     url = "https://auth.worksmobile.com/login/login?accessUrl=https%3A%2F%2Fmail.worksmobile.com%2F"
     driver.get(url)
