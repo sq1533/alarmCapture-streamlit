@@ -2,7 +2,17 @@
 streamlit, fast API, selenium, bueatifulSoup, Pandas
 
 ## 구성
-
+* customs/
+  * custom.py
+* pages/
+  * 1lookup.py
+  * 2DBM.py
+  * 3autoMail.py
+* database.py
+* home.py
+* main.py
+* worksAlarm.py
+* worksMail.py
 
 ## 목적
 팀원 간 업무의 정보 불균형 해소를 위한 실시간 알람 데이터 수집 및 mid정보 매칭 / 통합 화면 노출
